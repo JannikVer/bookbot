@@ -1,12 +1,13 @@
 from stats import word_count, letter_count, letter_sort
+import sys
 
 def get_book_text(path_file):
     with open(path_file) as f:
         file_content = f.read()
     return file_content
 
-def main():
-    file_content = get_book_text("books/frankenstein.txt")
+def main(book):
+    file_content = get_book_text(book)
     Word_count = word_count(file_content)
     Letter_count = letter_count(file_content)
     sorted_letter = letter_sort(Letter_count)
@@ -21,5 +22,9 @@ def main():
 
     print("============= END ===============")
 
-    
-main()
+
+if len(sys.argv) != 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
+
+main(sys.argv[1])
